@@ -2,9 +2,9 @@
     position: relative;
     height: 13%;
     width: 65%;
-    background: linear-gradient(to bottom, #f7bc50 60%, #e3ac4b 78%);
+    background: linear-gradient(to bottom, #f7b34f 60%, #e8a040 78%);
     border-radius: 0 0 30px 30px;
-    margin: 2% auto;
+    margin: 0 auto;
 }
 
 .BreadBottom:before {
@@ -14,7 +14,7 @@
     left: -12%;
     width: 25%;
     height: 100%;
-    background: linear-gradient(to bottom, #f7bc50 60%, #e3ac4b 78%);
+    background: linear-gradient(to bottom, #f7b34f 60%, #e8a040 78%);
     border-radius: 20% 0 0 50%;
 }
   
@@ -25,29 +25,27 @@
     right: -12%;
     width: 25%;
     height: 100%;
-    background: linear-gradient(to bottom, #f7bc50 60%, #e3ac4b 78%);
+    background: linear-gradient(to bottom, #f7b34f 60%, #e8a040 78%);
     border-radius: 0 20% 50% 0;
 }
-
+/* 
 .Shadow {
     position: absolute;
     bottom: -40%;
-    /* left: 0;
-    width: 100%; */
     left: -28px;
     width: 125%;
     height: 70%;
     background: #eae7e4;
     border-radius: 50%;
     z-index: -100
-}
+} */
 
 .BreadTop {
     height: 37%;
     width: 80%;
-    background: #f7bc50;
+    background: #f7b34f;
     border-radius: 155px 155px 0 0;
-    margin: 2% auto;
+    margin: 0 auto;
     position: relative;
 }
 .BreadTop span {
