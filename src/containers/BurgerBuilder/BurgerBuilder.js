@@ -10,17 +10,19 @@ const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,
     meat: 1.3,
-    bacon: 0.7
+    onion: 0.4,
+    tomato: 0.5
 }
 
 class BurgerBuilder extends Component {
     state = {
         purchaseable: false,
         ingredients: {
-            salad: 0,
+            tomato: 0,
+            onion: 0,
             cheese: 0,
-            meat: 0,
-            bacon: 0
+            meat: 0,    
+            salad: 0,
         },
         totalPrice: 4,
         purchasing: false
@@ -75,12 +77,7 @@ class BurgerBuilder extends Component {
     
     // triggered whenever order now button is clicked
     purchaseHandler = () => {
-        // if (this.props.isAuthenticated) {
           this.setState({ purchasing: true });
-        // } else {
-        //   this.props.onSetAuthRedirectPath('/checkout');
-        //   this.props.history.push('/auth');
-        // }
     };
 
     purchaseCancelHandler = () => {
@@ -89,25 +86,6 @@ class BurgerBuilder extends Component {
 
     purchaseContinueHandler = () => {
         alert('COntin')
-        // const queryParams = [];
-        // for (let i in this.state.ingredients) {
-        //   queryParams.push(
-        //     encodeURIComponent(i) +
-        //       '=' +
-        //       encodeURIComponent(this.state.ingredients[i])
-        //   );
-        // }
-        // queryParams.push(`price=${this.props.price}`);
-        //const queryString = queryParams.join('&');
-        // this.props.history.push({
-        //   pathname: '/checkout',
-        //   search: `?${queryString}` //'?' + queryString
-        // });
-
-        // this.props.onInitPurchase();
-        // this.props.history.push({
-        //   pathname: '/checkout'
-        // });
     };
 
     render() {
