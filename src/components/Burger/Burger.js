@@ -8,8 +8,6 @@ const Burger = props => {
     let transformedIngredients = Object.keys(props.ingredients)
         .map(igKey => {
             return [...Array(props.ingredients[igKey])].map((_, i) => {
-                console.log('igKey', igKey)
-                console.log('i', i)
                 return <BurgerIngredient key={igKey + i} type={igKey} />;
             });
         })  //to calculate the ingredients sum dynamically
