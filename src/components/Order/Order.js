@@ -4,25 +4,38 @@ import Aux from '../../hoc/Aux/Aux';
 import Button from '../UI/Button/Button';
 
 const Order = props => {
-    const ingredientSummary = Object.keys(props.ingredients)
-    .map(igKey => {
-      return <li key={igKey}><span style={{textTransform: 'capitalize'}}>{igKey}</span>: {props.ingredients[igKey]}</li>
-    })
-    
+    const ingredients = [];
+
+    //formating the received data
+    for (let ingredientName in props.ingredients) {
+        ingredients.push({
+            name: ingredientName,
+            amount: props.ingredients[ingredientName]
+        });
+    }
+
+    const IngredientOutput = ingredients.map(ig => {
+        return (
+            <span
+                key={ig.name}
+                style={{
+                    textTransform: 'capitalize',
+                    display: 'inline-block',
+                    margin: '0 7px ',
+                    border: '1px solid #ccc',
+                    padding: '5px'
+                }}
+            >
+                {ig.name} ({ig.amount})
+            </span>
+        );
+    });
+
     return (
-        <Aux>
-            <h3>Your Order</h3>
-            <p>A delicious burger with the following ingredients:</p>
-            <ul>
-                {ingredientSummary}
-            </ul>
-            <p>
-                Price: <strong> USD {props.price.toFixed(2)} </strong>
-            </p>
-            <p>Continue to Checkout?</p>
-            <Button btnType="Danger" clicked={props.purchaseCancelled}>Cancel</Button>
-            <Button btnType="Success" clicked={props.purchaseContinued}>Continue</Button>
-        </Aux>
+        <div className={classes.Order}>
+            <p>Ingredients: {IngredientOutput}</p>
+            <p>Price: <strong> USD {Number.parseFloat(props.price.toFixed(2))} </strong></p>
+        </div>
     )
 }
 
