@@ -7,7 +7,7 @@ import ContactData from './ContactData/ContactData';
 class Checkout extends Component {
       state = {
         ingredients: null,
-        price: 0
+        totalPrice: 0
     };
 
     //before render child component will have access to the props and change data format
@@ -25,6 +25,7 @@ class Checkout extends Component {
                 ingredients[param[0]] = +param[1];
             }
         }
+        console.log('price ', price)
 
         this.setState({
             ingredients: ingredients,
@@ -51,7 +52,7 @@ class Checkout extends Component {
                 />
                 <Route
                     path={`${this.props.match.url}/contact-data`}
-                    render={(props) => (<ContactData ingredients={this.state.ingredients} {...props}/>)}
+                    render={(props) => (<ContactData ingredients={this.state.ingredients} price={this.state.totalPrice} {...props}/>)}
                 />
             </div>
         )

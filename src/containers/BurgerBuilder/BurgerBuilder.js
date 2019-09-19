@@ -5,7 +5,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import Order from '../../components/Order/Order';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 import axios from '../../axios-orders';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
@@ -111,9 +111,8 @@ class BurgerBuilder extends Component {
             );
         }
         
-        queryParams.push(`price=${this.props.price}`);
+        queryParams.push(`price=${this.state.totalPrice}`);
         const queryString = queryParams.join('&');
-
         this.props.history.push({
             pathname: '/checkout',
             search: '?' + queryString
@@ -152,7 +151,7 @@ class BurgerBuilder extends Component {
                 </Aux>
             );
             orderSummary = (
-                <Order
+                <OrderSummary
                     ingredients={this.state.ingredients}
                     price={this.state.totalPrice}
                     purchaseCancelled={this.purchaseCancelHandler}
