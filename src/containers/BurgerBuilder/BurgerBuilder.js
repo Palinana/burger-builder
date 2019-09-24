@@ -14,13 +14,6 @@ import * as actions from '../../store/actions/index';
 
 class BurgerBuilder extends Component {
     state = {
-        // ingredients: {
-        //     tomato: 0,
-        //     onion: 0,
-        //     cheese: 0,
-        //     meat: 0,    
-        //     salad: 0,
-        // },
         purchasing: false,
     };
 
