@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+
 import classes from './ContactData.module.css';
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
@@ -32,6 +35,8 @@ class ContactData extends Component {
                 validation: {
                     required: true
                 },
+                valid: false,
+                touched: false
             },
             zipCode: {
                 elementType: 'input',
@@ -87,6 +92,7 @@ class ContactData extends Component {
                 valid: true
             }
         },
+        formIsValid: false,
         loading: false
     }
 
@@ -128,12 +134,21 @@ class ContactData extends Component {
         }
 
         updatedFormEl.value = e.target.value;
-        updatedFormEl.valid = this.checkValidity(updatedFormEl.value, updatedFormEl.validation)
+        updatedFormEl.valid = this.checkValidity(updatedFormEl.value, updatedFormEl.validation);
+        updatedFormEl.touched = true;
 
         updatedOrderForm[inputIdentifier] = updatedFormEl;
         console.log('updatedOrderForm ', updatedOrderForm)
+        
+        //checking if form is valid, otherwise unable the order button
+        let formIsValid = true;
+        for (let inputIdentifier in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+        }
+
         this.setState({
-            orderForm: updatedOrderForm
+            orderForm: updatedOrderForm,
+            formIsValid
         });
     }
 
@@ -141,12 +156,18 @@ class ContactData extends Component {
         //in order to not override validation result with every check as going down
         let isValid = true;
 
+        if(!rules) {
+            return true;
+        }
+
         if(rules.required) {
             isValid = value.trim() !== '' && isValid;
         }
+
         if(rules.minLength) {
             isValid = value.length >= rules.minLength && isValid;
         }
+        
         if(rules.maxLength) {
             isValid = value.length <= rules.maxLength && isValid;
         }
@@ -172,12 +193,12 @@ class ContactData extends Component {
                         elementConfig={formEl.config.elementConfig}
                         value={formEl.config.value}
                         changed={e => this.inputChangedHandler(e, formEl.id)}
-                        // invalid={!formEl.config.valid}
-                        // shouldValidate={formEl.config.validation}
-                        // touched={formEl.config.touched}
+                        invalid={!formEl.config.valid}
+                        shouldValidate={formEl.config.validation}
+                        touched={formEl.config.touched}
                     />
                 ))}
-                <Button btnType="Success">ORDER</Button>
+                <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         );
 
@@ -194,4 +215,13 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+    return {
+        ingredients: state.ingredients,
+        price: state.totalPrice
+    };
+};
+  
+export default connect(mapStateToProps)(
+    withErrorHandler(ContactData, axios)
+);
