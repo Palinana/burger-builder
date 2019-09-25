@@ -3,7 +3,7 @@ import {
     REMOVE_INGREDIENT,
     SET_INGREDIENTS,
     FETCH_INGREDIENTS_FAILED,
-    GET_INGREDIENTS
+    INIT_INGREDIENTS
 } from './types';
 import axios from '../../axios-orders';
 
@@ -35,19 +35,19 @@ export const fetchIngredientsFailed = () => {
     };
 };
 
-export const fetchIngredients = () => {
+export const initIngredients = () => {
     return dispatch => {
       const req = async () => {
         try {
           const res = await axios.get('https://burger-builder-c8bc7.firebaseio.com/ingredients.json');
           dispatch(setIngredients(res.data));
-        } catch (e) {
-          dispatch(fetchIngredientsFailed());
+        } catch (err) {
+          dispatch(fetchIngredientsFailed(err));
         }
       };
       req();
     };
     return {
-      type: GET_INGREDIENTS
+      type: INIT_INGREDIENTS
     };
 };

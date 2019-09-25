@@ -44,13 +44,13 @@ class BurgerBuilder extends Component {
     };
 
     purchaseContinueHandler = () => {
+        this.props.onInitPurchase();
         this.props.history.push({
             pathname: '/checkout'
         });
     };
 
     render() {
-        console.log('props ', this.props)
         //copy of the original ingred list (to disable buttons if ingred are === 0)
         const disabledInfo = {
             ...this.props.ingredients
@@ -107,9 +107,9 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
     return {
-        ingredients: state.ingredients,
-        price: state.totalPrice,
-        error: state.error,
+        ingredients: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        error: state.burgerBuilder.error,
     };
 };
 
@@ -117,7 +117,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: ingName => dispatch(actions.addIngredient(ingName)),
         onIngredientRemoved: ingName => dispatch(actions.removeIngredient(ingName)),
-        onInitIngredients: () => dispatch(actions.fetchIngredients()),
+        onInitIngredients: () => dispatch(actions.initIngredients()),
+        onInitPurchase: () => dispatch(actions.purchaseInit()),
     };
 };
 

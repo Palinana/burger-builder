@@ -1,4 +1,10 @@
-import * as actionTypes from '../actions/types';
+import {
+    ADD_INGREDIENT,
+    REMOVE_INGREDIENT,
+    SET_INGREDIENTS,
+    FETCH_INGREDIENTS_FAILED
+} from '../actions/types';
+import { updateObject } from '../utility';
 
 const initialState = {
     ingredients: null,
@@ -15,17 +21,30 @@ const INGREDIENT_PRICES = {
     tomato: 0.5
 }
 
-const reducer = (state = initialState, action) => {
+const burgerBuilderReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.ADD_INGREDIENT:
-            return {...state,
-                ingredients: {
-                    ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
-                },
-                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
-                };
-        case actionTypes.REMOVE_INGREDIENT:
+        case ADD_INGREDIENT:
+            /* ------------ Refactorized/New/Mad approarch: ----------- */
+            const updatedIngredient = {
+                [action.ingredientName]: state.ingredients[action.ingredientName] + 1
+            };
+            const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
+            const updatedState = {
+                ingredients: updatedIngredients,
+                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+                building: true
+            };
+            return updateObject(state, updatedState);
+            
+            /* ------------ Usual approarch: ------------ */
+            // return {...state,
+            //     ingredients: {
+            //         ...state.ingredients,
+            //         [action.ingredientName]: state.ingredients[action.ingredientName] + 1
+            //     },
+            //     totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+            //     };
+        case REMOVE_INGREDIENT:
             return {
                 ...state,
                 ingredients: {
@@ -34,7 +53,7 @@ const reducer = (state = initialState, action) => {
                 },
                 totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
                 };
-        case actionTypes.SET_INGREDIENTS:
+        case SET_INGREDIENTS:
             return {
                 ...state,
                 ingredients: {
@@ -47,7 +66,7 @@ const reducer = (state = initialState, action) => {
                 totalPrice: 4,
                 error: false
             };
-        case actionTypes.FETCH_INGREDIENTS_FAILED:
+        case FETCH_INGREDIENTS_FAILED:
             return {
                 ...state,
                 error: true
@@ -57,6 +76,6 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-export default reducer;
+export default burgerBuilderReducer;
 
   
