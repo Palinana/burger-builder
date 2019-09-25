@@ -3,7 +3,8 @@ import {
     REMOVE_INGREDIENT,
     SET_INGREDIENTS,
     FETCH_INGREDIENTS_FAILED
-  } from '../actions/types';
+} from '../actions/types';
+import { updateObject } from '../utility';
 
 const initialState = {
     ingredients: null,
@@ -23,13 +24,26 @@ const INGREDIENT_PRICES = {
 const burgerBuilderReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_INGREDIENT:
-            return {...state,
-                ingredients: {
-                    ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
-                },
-                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
-                };
+            /* ------------ Refactorized/New/Mad approarch: ----------- */
+            const updatedIngredient = {
+                [action.ingredientName]: state.ingredients[action.ingredientName] + 1
+            };
+            const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
+            const updatedState = {
+                ingredients: updatedIngredients,
+                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+                building: true
+            };
+            return updateObject(state, updatedState);
+            
+            /* ------------ Usual approarch: ------------ */
+            // return {...state,
+            //     ingredients: {
+            //         ...state.ingredients,
+            //         [action.ingredientName]: state.ingredients[action.ingredientName] + 1
+            //     },
+            //     totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+            //     };
         case REMOVE_INGREDIENT:
             return {
                 ...state,

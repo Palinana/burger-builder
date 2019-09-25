@@ -12,3 +12,9 @@ export const PURCHASE_BURGER_SUCCESS = 'PURCHASE_BURGER_SUCCESS';
 export const PURCHASE_BURGER_FAIL = 'PURCHASE_BURGER_FAIL';
 // when load the checkout page
 export const PURCHASE_INIT = 'PURCHASE_INIT';
+
+//fetch orders
+export const FETCH_ORDERS = 'FETCH_ORDERS';
+export const FETCH_ORDERS_START = 'FETCH_ORDERS_START';
+export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
+export const FETCH_ORDERS_FAIL = 'FETCH_ORDERS_FAIL';
