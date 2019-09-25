@@ -3,7 +3,7 @@ import {
     REMOVE_INGREDIENT,
     SET_INGREDIENTS,
     FETCH_INGREDIENTS_FAILED,
-    GET_INGREDIENTS
+    INIT_INGREDIENTS
 } from './types';
 import axios from '../../axios-orders';
 
@@ -35,7 +35,7 @@ export const fetchIngredientsFailed = () => {
     };
 };
 
-export const fetchIngredients = () => {
+export const initIngredients = () => {
     return dispatch => {
       const req = async () => {
         try {
@@ -48,6 +48,6 @@ export const fetchIngredients = () => {
       req();
     };
     return {
-      type: GET_INGREDIENTS
+      type: INIT_INGREDIENTS
     };
 };
