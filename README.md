@@ -1,5 +1,5 @@
 # BurgerBuilder
-BurgerBuilder is an app for building custom burgers.
+BurgerBuilder is an application, where users can order a custom burger by choosing ingredients. In order to place an order a user need to simply create an account and login.
 
 
 ## Technologies
