@@ -2,9 +2,10 @@
     position: fixed;
     z-index: 500;
     background-color: white;
-    width: 70%;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 1px black;
+    width: 70%;    
+    border-radius: 15px;
+    border: none;
+    box-shadow: none;
     padding: 16px;
     left: 15%;
     top: 30%;
