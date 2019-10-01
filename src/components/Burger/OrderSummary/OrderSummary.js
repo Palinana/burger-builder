@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
+import classes from './OrderSummary.module.css';
 
 class OrderSummary extends Component {
   //This could be a functional component, does not have to be a class
@@ -17,13 +18,13 @@ class OrderSummary extends Component {
     });
     return (
       <Aux>
-            <h3>Your Order</h3>
-            <p>A delicious burger with the following ingredients:</p>
-            <ul>{ingredientSummary}</ul>
+            <h3 className={classes.OrderSummaryTitle}>Your Order</h3>
+            <p className={classes.OrderSummarySubTitle}>A delicious burger with the following ingredients:</p>
+            <ul className={classes.OrderSummaryList}>{ingredientSummary}</ul>
             <p>
-                <strong>Total Price: {this.props.price.toFixed(2)}</strong>
+                <strong className={classes.OrderSummaryTotal}>Total Price: {this.props.price.toFixed(2)}</strong>
             </p>
-            <p>Continue to Checkout?</p>
+            <p  className={classes.OrderSummaryText}>Continue to Checkout?</p>
             <Button btnType="Danger" clicked={this.props.purchaseCancelled}>
                 CANCEL
             </Button>

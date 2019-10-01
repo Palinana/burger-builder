@@ -4,3 +4,19 @@
     margin: 10px auto;
     box-sizing: border-box;
 }
+
+.OrderIngredients {
+    background: #FCEDAA;
+    margin: 0;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    color: #EB9F31;
+}
+
+.OrderPrice {
+    background: #FAD585;
+    margin: 0;
+    padding: 10px 25px;
+    border-radius: 0 0 10px 10px;
+    color: white;
+}

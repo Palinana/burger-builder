@@ -22,7 +22,6 @@ const Order = props => {
                     textTransform: 'capitalize',
                     display: 'inline-block',
                     margin: '0 7px ',
-                    border: '1px solid #ccc',
                     padding: '5px'
                 }}
             >
@@ -33,8 +32,8 @@ const Order = props => {
 
     return (
         <div className={classes.Order}>
-            <p>Ingredients: {IngredientOutput}</p>
-            <p>Price: <strong> USD {Number.parseFloat(props.price.toFixed(2))} </strong></p>
+            <p className={classes.OrderIngredients}>Ingredients: {IngredientOutput}</p>
+            <p className={classes.OrderPrice}>Price: <strong> USD {Number.parseFloat(props.price.toFixed(2))} </strong></p>
         </div>
     )
 }
