@@ -93,13 +93,15 @@ class BurgerBuilder extends Component {
 
         return(
             <Aux>
-                <Modal 
-                    show={this.state.purchasing}
-                    modalClosed={this.purchaseCancelHandler}
-                >
-                    {orderSummary}
-                </Modal>
-                {burger}
+                <div style={{'padding-top': '25px', 'background': '#fbe6a6'}}>
+                    <Modal 
+                        show={this.state.purchasing}
+                        modalClosed={this.purchaseCancelHandler}
+                    >
+                        {orderSummary}
+                    </Modal>
+                    {burger}
+                </div>
             </Aux>
         )
     }
