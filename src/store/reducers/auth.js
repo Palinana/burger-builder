@@ -3,6 +3,7 @@ import {
     AUTH_SUCCESS,
     AUTH_FAIL,
     AUTH_LOGOUT,
+    AUTH_CHECK_TIMEOUT
 } from '../actions/types';
 
 const initialState = {
@@ -32,6 +33,12 @@ const reducer = (state = initialState, action) => {
             return {
               error: action.error,
               loading: false
+            };
+        case AUTH_LOGOUT:
+            return {
+                ...state,
+                token: null,
+                userId: null
             };
         default:
             return state; 

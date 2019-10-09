@@ -2,6 +2,7 @@ import {
     AUTH_START,
     AUTH_SUCCESS,
     AUTH_FAIL,
+    AUTH_CHECK_TIMEOUT,
     AUTH_LOGOUT,
 } from './types';
 import axios from 'axios';
@@ -28,6 +29,20 @@ export const authFail = error => {
     };
 };
 
+export const logout = () => {
+    return {
+        type: AUTH_LOGOUT
+    };
+};
+
+export const checkAuthTimeout = expirationTime => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(logout())
+        }, expirationTime * 1000)
+    }
+};
+
 export const auth = (email, password, isSignup) => {
     return dispatch => {
         dispatch(authStart());
@@ -43,6 +58,7 @@ export const auth = (email, password, isSignup) => {
             .then(response => {
                 console.log(response)
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
+                dispatch(checkAuthTimeout(3600));
             })
             .catch(err => {
                 console.log(err)
