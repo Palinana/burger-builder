@@ -7,6 +7,6 @@ BurgerBuilder is an application, where users can order a custom burger by choosi
 
 ## Technologies
 <b>Front-end:</b> Redux, React, CSS, HTML<br/>
-<b>Back-end:</b> Express, Node.js, Firebase<br/>
+<b>Back-end:</b> Express, Node.js, Firebase, Firestore<br/>
 <b>Testing:</b> Mocha, Chai, Jest, Enzyme
 
