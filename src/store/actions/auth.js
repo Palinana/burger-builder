@@ -4,6 +4,7 @@ import {
     AUTH_FAIL,
     AUTH_CHECK_TIMEOUT,
     AUTH_LOGOUT,
+    SET_AUTH_REDIRECT_PATH
 } from './types';
 import axios from 'axios';
 
@@ -66,3 +67,10 @@ export const auth = (email, password, isSignup) => {
             })
     }
 }
+
+export const setAuthRedirectPath = path => {
+    return {
+        type: SET_AUTH_REDIRECT_PATH,
+        path
+    };
+};

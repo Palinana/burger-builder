@@ -44,6 +44,13 @@ class Auth extends Component {
         isSignup: true
     }
 
+    componentDidMount() {
+        //reseting back - if not building a burger, after auth go to burger page
+        if (!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
+            this.props.onSetAuthRedirectPath();
+        }
+    }
+
     submitHandler = event => {
         event.preventDefault();
         this.props.onAuth(
@@ -136,7 +143,7 @@ class Auth extends Component {
 
         let authRedirect = null;
         if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to='/' />;
+            authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
      
         return (
@@ -153,7 +160,7 @@ class Auth extends Component {
                     clicked={this.switchAuthModeHandler} 
                     btnType="Danger"
                 >
-                    SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}
+                    SWITCH TO {this.state.isSignup ? 'SIGN IN' : 'SIGN UP'}
                 </Button>
             </div>
         )
@@ -166,6 +173,8 @@ const mapStateToProps = state => {
       loading: state.auth.loading,
       error: state.auth.error,
       isAuthenticated: state.auth.token !== null,
+      buildingBurger: state.burgerBuilder.building,
+      authRedirectPath: state.auth.authRedirectPath
     };
 };
   
@@ -173,7 +182,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) =>
             dispatch(actions.auth(email, password, isSignup)),
-        // onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
     };
 };
 
