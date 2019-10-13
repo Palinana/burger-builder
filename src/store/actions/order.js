@@ -32,17 +32,18 @@ export const purchaseBurgerStart = () => {
     };
 };
 
-export const purchaseBurger = (orderData) => {
+export const purchaseBurger = (orderData, token) => {
     return dispatch => {
+        dispatch(purchaseBurgerStart());
         const req = async () => {
-            try {
-                dispatch(purchaseBurgerStart());
-                axios.post('/orders.json', orderData)
-                .then(response => {
-                    dispatch(purchaseBurgerSuccess(response.data.name, orderData));
-                })
-            } catch (e) {
-                dispatch(purchaseBurgerFail());
+          try {
+            const response = await axios.post(
+              '/orders.json?auth=' + token,
+                orderData
+            );
+            dispatch(purchaseBurgerSuccess(response.data.name, orderData));
+            } catch (error) {
+                dispatch(purchaseBurgerFail(error));
             }
         };
         req();
@@ -75,24 +76,28 @@ export const fetchOrdersStart = () => {
     };
 };
   
-export const fetchOrders = () => {
+export const fetchOrders = (token, userId) => {
     return dispatch => {
+        const queryParams =
+          '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
         dispatch(fetchOrdersStart());
         const req = async () => {
-          try {
-            const res = await axios.get('/orders.json');
-            const fetchedOrders = [];
+            try {
+                const res = await axios.get('/orders.json' + queryParams);
+                const fetchedOrders = [];
                 for (let key in res.data) {
                     fetchedOrders.push({
                         ...res.data[key],
                         id: key
                     });
                 }
-            dispatch(fetchOrdersSuccess(fetchedOrders));
-          } catch (err) {
-            dispatch(fetchOrdersFail(err));
-          }
+                dispatch(fetchOrdersSuccess(fetchedOrders));
+            } catch (e) {
+                dispatch(fetchOrdersFail(e));
+            }
         };
         req();
     };
 };
+
+// persisting login state across the sessions using localStorage(Browser local storage) - action(auth)

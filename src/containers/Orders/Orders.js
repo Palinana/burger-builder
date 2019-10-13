@@ -25,21 +25,23 @@ class Orders extends Component {
               />
             ));
         }
-        return <div style={{'padding-top': '25px'}}>{orders}</div>;
+        return <div style={{'paddingTop': '25px'}}>{orders}</div>;
     }
 }
 
 const mapStateToProps = state => {
     return {
-      orders: state.order.orders,
-      loading: state.order.loading
+        orders: state.order.orders,
+        loading: state.order.loading,
+        token: state.auth.token,
+        userId: state.auth.userId
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchOrders: () =>
-            dispatch(actions.fetchOrders())
+        onFetchOrders: (token, userId) =>
+            dispatch(actions.fetchOrders(token, userId))
     };
 };
 

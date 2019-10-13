@@ -4,7 +4,7 @@ import {
     SET_INGREDIENTS,
     FETCH_INGREDIENTS_FAILED
 } from '../actions/types';
-import { updateObject } from '../utility';
+import { updateObject } from '../../shared/utility';
 
 const initialState = {
     ingredients: null,
@@ -51,7 +51,8 @@ const burgerBuilderReducer = (state = initialState, action) => {
                     ...state.ingredients,
                     [action.ingredientName]: state.ingredients[action.ingredientName] - 1
                 },
-                totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+                totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+                building: true
                 };
         case SET_INGREDIENTS:
             return {
@@ -64,7 +65,8 @@ const burgerBuilderReducer = (state = initialState, action) => {
                     salad: action.ingredients.salad,
                 },
                 totalPrice: 4,
-                error: false
+                error: false,
+                building: false
             };
         case FETCH_INGREDIENTS_FAILED:
             return {

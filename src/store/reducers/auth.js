@@ -3,6 +3,8 @@ import {
     AUTH_SUCCESS,
     AUTH_FAIL,
     AUTH_LOGOUT,
+    AUTH_CHECK_TIMEOUT,
+    SET_AUTH_REDIRECT_PATH
 } from '../actions/types';
 
 const initialState = {
@@ -10,6 +12,7 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
+    authRedirectPath: '/'
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +35,17 @@ const reducer = (state = initialState, action) => {
             return {
               error: action.error,
               loading: false
+            };
+        case AUTH_LOGOUT:
+            return {
+                ...state,
+                token: null,
+                userId: null
+            };
+        case SET_AUTH_REDIRECT_PATH:
+            return {
+                ...state,
+                authRedirectPath: action.path
             };
         default:
             return state; 

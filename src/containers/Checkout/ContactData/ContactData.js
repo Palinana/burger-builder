@@ -9,6 +9,7 @@ import classes from './ContactData.module.css';
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import * as actions from '../../../store/actions/index';
+import { updateObject, checkValidity } from '../../../shared/utility';
 
 class ContactData extends Component {
     state = {
@@ -109,29 +110,28 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            orderData: formData
+            orderData: formData,
+            userId: this.props.userId
         }
 
         this.props.onOrderBurger(order, this.props.token);
     }
 
     inputChangedHandler = (e, inputIdentifier) => {
-        //deep cloning of the state
 
-        //clone of the original state and not refering to it anymore
-        const updatedOrderForm = {
-            ...this.state.orderForm
-        }
         //cloning nested objects - just field names(keys), not deeper
-        const updatedFormEl = {
-            ...updatedOrderForm[inputIdentifier]
-        }
+        const updatedFormEl = updateObject(this.state.orderForm[inputIdentifier], {
+            value: e.target.value,
+            valid: checkValidity(
+                e.target.value,
+                this.state.orderForm[inputIdentifier].validation
+            ),
+            touched: true
+        })
 
-        updatedFormEl.value = e.target.value;
-        updatedFormEl.valid = this.checkValidity(updatedFormEl.value, updatedFormEl.validation);
-        updatedFormEl.touched = true;
-
-        updatedOrderForm[inputIdentifier] = updatedFormEl;
+        const updatedOrderForm = updateObject(this.state.orderForm, {
+            [inputIdentifier]: updatedFormEl
+        });
         
         //checking if form is valid, otherwise unable the order button
         let formIsValid = true;
@@ -143,29 +143,6 @@ class ContactData extends Component {
             orderForm: updatedOrderForm,
             formIsValid
         });
-    }
-
-    checkValidity(value, rules) {
-        //in order to not override validation result with every check as going down
-        let isValid = true;
-
-        if(!rules) {
-            return true;
-        }
-
-        if(rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if(rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-        }
-        
-        if(rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-
-        return isValid;
     }
 
     render() {
@@ -212,7 +189,9 @@ const mapStateToProps = state => {
     return {
         ingredients: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.token,
+        userId: state.auth.userId
     };
 };
 
