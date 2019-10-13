@@ -25,7 +25,7 @@ class Orders extends Component {
               />
             ));
         }
-        return <div style={{'padding-top': '25px'}}>{orders}</div>;
+        return <div style={{'paddingTop': '25px'}}>{orders}</div>;
     }
 }
 
