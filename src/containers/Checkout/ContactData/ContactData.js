@@ -11,7 +11,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import * as actions from '../../../store/actions/index';
 import { updateObject, checkValidity } from '../../../shared/utility';
 
-class ContactData extends Component {
+export class ContactData extends Component {
     state = {
         orderForm: {
             name: {

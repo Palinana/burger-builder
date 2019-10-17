@@ -25,7 +25,6 @@ const burgerBuilderReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_INGREDIENT:
             /* ------------ Refactorized/New/Mad approarch: ----------- */
-            console.log('[action.ingredientName] ',[action.ingredientName])
             const updatedIngredient = {
                 [action.ingredientName]: state.ingredients[action.ingredientName] + 1
             };
