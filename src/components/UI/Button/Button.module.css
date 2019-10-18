@@ -11,8 +11,8 @@
   }
   
 .Button:first-of-type {
-    margin-left: 0;
-    padding-left: 0;
+    /* margin-left: 0; */
+    /* padding-left: 0; */
 }
   
 .Button:disabled {
@@ -21,9 +21,9 @@
 }
   
 .Success {
-    color: #39B449;
+    color: #efcc7c;
 }
   
 .Danger {
-    color: #E41E2D;
+    color: #e4711e;;
 }

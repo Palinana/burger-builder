@@ -7,7 +7,7 @@ const CheckoutSummary = props => {
     //preview the burger before order it
     return (
         <div className={classes.CheckoutSummary}>
-            <h1>We hope it tastes well!!!</h1>
+            <h1 className={classes.CheckoutSummaryTitle}>We hope it tastes well!!!</h1>
             <div>
                 <Burger ingredients={props.ingredients} />
                 <Button btnType="Danger" clicked={props.checkoutCancelled}>

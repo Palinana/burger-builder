@@ -39,8 +39,7 @@ class Auth extends Component {
                 },
                 valid: false,
                 touched: false
-            },
-            isSignup: true
+            }
         },
         isSignup: true
     }
@@ -128,17 +127,20 @@ class Auth extends Component {
             <div className={classes.Auth}>
                 {authRedirect}
                 {errorMessage}
+                <h1 className={classes.AuthTitle}>
+                    {this.state.isSignup ? 'SIGN IN' : 'SIGN UP'}
+                </h1>
                 <form onSubmit={this.submitHandler}>
                     { form }
-                    <Button btnType="Success">
+                    <button className={classes.AuthSubmit}>
                         SUBMIT
-                    </Button>
+                    </button>
                 </form>
                 <Button 
                     clicked={this.switchAuthModeHandler} 
                     btnType="Danger"
                 >
-                    SWITCH TO {this.state.isSignup ? 'SIGN IN' : 'SIGN UP'}
+                    {!this.state.isSignup ? 'SIGN IN' : 'SIGN UP'}
                 </Button>
             </div>
         )

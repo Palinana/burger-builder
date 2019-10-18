@@ -4,7 +4,7 @@ import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
 import classes from './OrderSummary.module.css';
 
-class OrderSummary extends Component {
+export class OrderSummary extends Component {
   //This could be a functional component, does not have to be a class
 
   render() {
