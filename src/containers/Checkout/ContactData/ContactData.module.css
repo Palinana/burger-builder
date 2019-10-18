@@ -5,6 +5,10 @@
     padding: 10px;
     box-sizing: border-box;
 }
+
+.ContactData h4 {
+    color: #888888;
+}
   
 @media (min-width: 600px) {
     .ContactData {

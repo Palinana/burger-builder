@@ -35,9 +35,12 @@
         border-bottom: 4px solid transparent;
     }
   
-    .NavigationItem a:hover,
     .NavigationItem a:active,
     .NavigationItem a.active {
         border-bottom: 4px solid #7EC1D2;
+    }
+
+    .NavigationItem a:hover {
+        border-bottom: 4px solid #4ba9c0;
     }
 }

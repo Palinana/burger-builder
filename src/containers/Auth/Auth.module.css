@@ -2,10 +2,63 @@
     margin: 20px auto;
     width: 80%;
     text-align: center;
-    box-shadow: 0 2px 3px #ccc;
-    border: 1px solid #eee;
-    padding: 10px;
+    padding-top: 25px;
     box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.AuthTitle {
+    color: #efcc7c;
+}
+
+.AuthSubmit {
+    background-color: #fbe6a6;
+    color: #E58407;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1em;
+    padding: 13px 40px;
+    border-radius: 100px;
+    border: none;
+    margin-top: 25px;
+}
+
+.AuthSubmit:hover, .AuthSubmit:active {
+    color: #f9b55f;
+}
+
+.AuthSubmit:disabled {
+    background-color: #F3F0EA;
+    color: #888888;
+    cursor: not-allowed
+}
+
+.AuthSubmit:hover:disabled {
+    background-color: rgb(230, 227, 221);
+    color: #888888;
+    cursor: not-allowed;
+}
+
+.AuthSubmit:not(:disabled) {
+    animation: enable 0.3s linear;
+}
+
+@keyframes enable {
+    0% {
+        transform: scale(1);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 @media (min-width: 600px) {

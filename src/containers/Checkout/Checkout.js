@@ -26,7 +26,7 @@ export class Checkout extends Component {
             ) : null;
 
             summary = (
-                <div>
+                <div style={{'paddingTop': '25px'}}>
                     {purchasedRedirect}
                     <CheckoutSummary 
                         ingredients={this.props.ingredients}

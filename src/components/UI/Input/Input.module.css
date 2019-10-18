@@ -14,6 +14,7 @@
     outline: none;
     border: none;
     background-color: white;
+    color: #888888;
     font: inherit;
     padding: 6px 10px;
     display: block;
@@ -21,6 +22,9 @@
     box-sizing: border-box;
     border-radius: 5px;
     padding: 10px;
+
+    background: cornsilk;
+    height: 45px;
 }
   
 .InputElement:focus {

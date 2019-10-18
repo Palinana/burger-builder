@@ -31,7 +31,7 @@
 }
 
 .OrderButton:hover, .OrderButton:active {
-    color: rgb(236, 234, 228);
+    color: #f9b55f;
 }
 
 .OrderButton:disabled {

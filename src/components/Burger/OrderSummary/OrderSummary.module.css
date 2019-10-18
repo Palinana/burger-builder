@@ -5,3 +5,7 @@
 .OrderSummarySubTitle, .OrderSummaryList {
     color: #EB9F31;
 }
+
+.OrderSummaryList {
+color: #888888;
+}
